@@ -25,33 +25,21 @@ is what we proposed to use for correcting length bias in GO enrichment analysis.
 
 The first prostate cancer dataset first analyzed in [4] can be obtained from the `goseq` Bioconductor package. It is also included in our `GOglm` package as a data example. The following R codes will load `goseq` into R session and display the first five ENSEMBL genes with 1 indicating differential expression (DE) and 0 otherwise.
 
-
-```r
+```{r, message=FALSE}
 library(goseq)
 data(genes)
-head(genes, 5)
+head(genes,5)
 ```
-
-```
-## ENSG00000230758 ENSG00000182463 ENSG00000124208 ENSG00000230753 
-##               0               0               0               0 
-## ENSG00000224628 
-##               0
-```
-
 
 Testing DE genes was implemented using the `edgeR` package. We adopted the common dispersion parameter approach to fit the negative binomial (NB) model using the quantile-adjusted conditional maximum likelihood (qCML) method, but the tagwise dispersion approach should also work. The following table shows part of the original raw counts table.
 
-
+```{r, echo=FALSE, message=FALSE}
+library(edgeR)
+table.summary = read.table(system.file("extdata","Li_sum.txt", package = "goseq"), sep = "\t", header = TRUE, stringsAsFactors = FALSE)
+counts = table.summary[, -1]
+rownames(counts) = table.summary[, 1]
+counts[1359:1363, ]
 ```
-##                 lane1 lane2 lane3 lane4 lane5 lane6 lane8
-## ENSG00000089057   174    98   164   208   252   173    96
-## ENSG00000125520     6     1    17    17    23    11     5
-## ENSG00000207427     0     0     0     0     0     0     0
-## ENSG00000101152    41    33    32    46    35    44    13
-## ENSG00000089199     0     0     0     0     0     2     0
-```
-
 
 This $n$-by-$r$ matrix of RNA-seq read counts is also required for the NBP exact test `nbp.test()` implemented in `NBPSeq`, and for the nonparametric modeling of the variance `nbinomTest()` implemented in `DESeq`.
 
@@ -59,65 +47,28 @@ For ease of comparison with published results in our paper, in analyzing the pro
 
 The table below shows the partial result of the NB exact test using `edgeR`. The genes are ordered by DE testing $p$-values, and significance statistics will be obtained by proper transformations of these (un-adjusted) $p$-values.
 
-
+```{r, echo=FALSE}
+grp = factor(rep(c("Control", "Treated"), times = c(4, 3)))
+summarized = DGEList(counts, lib.size = colSums(counts), group = grp);
+disp = estimateCommonDisp(summarized)
+tested = exactTest(disp)
+TTags = topTags(tested,n=49506)  # ask for all genes; contains FDR
+head(TTags$table,5)
 ```
-##                  logFC logCPM    PValue       FDR
-## ENSG00000127954 12.373  6.663 2.252e-80 1.115e-75
-## ENSG00000151503  5.403  8.495 1.532e-65 3.793e-61
-## ENSG00000096060  4.888  9.444 6.908e-60 1.140e-55
-## ENSG00000091879  5.669  6.259 1.094e-54 1.354e-50
-## ENSG00000132437 -5.931  7.945 2.638e-52 2.612e-48
-```
-
 
 In `GOglm` we load the data and obtain a data frame ready for use by the `goglm` function. Essentially we need two columns: `$p$-value` and `length`. The subsetted data frame `psc.subset` will be passed to the first argument of `goglm`:
 
-
-```r
+```{r, message=FALSE}
 library(GOglm)
 data(ProsCancer)
 rownames(ProsCancer) <- as.character(ProsCancer$X)
 head(ProsCancer)
-```
-
-```
-##                               X  logFC logCPM    PValue       FDR length
-## ENSG00000127954 ENSG00000127954 12.373  6.663 2.252e-80 1.115e-75   3923
-## ENSG00000151503 ENSG00000151503  5.403  8.495 1.532e-65 3.793e-61   5640
-## ENSG00000096060 ENSG00000096060  4.888  9.444 6.908e-60 1.140e-55   4106
-## ENSG00000091879 ENSG00000091879  5.669  6.259 1.094e-54 1.354e-50   2536
-## ENSG00000132437 ENSG00000132437 -5.931  7.945 2.638e-52 2.612e-48   1968
-## ENSG00000166451 ENSG00000166451  4.560  8.453 6.313e-52 5.209e-48   1567
-##                 log.gl sig.stat de.ind
-## ENSG00000127954  8.275    5.217      1
-## ENSG00000151503  8.638    5.012      1
-## ENSG00000096060  8.320    4.922      1
-## ENSG00000091879  7.838    4.830      1
-## ENSG00000132437  7.585    4.786      1
-## ENSG00000166451  7.357    4.778      1
-```
-
-```r
 ## subset to two columns required by goglm:
-psc.subset <- ProsCancer[, c("PValue", "length")]
+psc.subset <- ProsCancer[ , c("PValue", "length")]
 head(psc.subset)
+## not run
+# result <- goglm(data = psc.subset, trans.p = "d.log", genome = "hg18", id = "ensGene")
 ```
-
-```
-##                    PValue length
-## ENSG00000127954 2.252e-80   3923
-## ENSG00000151503 1.532e-65   5640
-## ENSG00000096060 6.908e-60   4106
-## ENSG00000091879 1.094e-54   2536
-## ENSG00000132437 2.638e-52   1968
-## ENSG00000166451 6.313e-52   1567
-```
-
-```r
-## not run result <- goglm(data = psc.subset, trans.p = 'd.log', genome =
-## 'hg18', id = 'ensGene')
-```
-
 
 ## GO annotations
 
