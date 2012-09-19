@@ -1,0 +1,4 @@
+export(goglm)
+export(summary.goglm)
+import(GO.db)
+import(goseq)

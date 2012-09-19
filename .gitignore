@@ -1,0 +1,9 @@
+*.[oa]
+*~
+*#
+*.r
+*.Rcheck/
+.Rpackages
+.Rhistory
+.Rprofile
+.RData
