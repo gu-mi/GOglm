@@ -1,7 +1,6 @@
 *.[oa]
 *~
 *#
-*.r
 *.Rcheck/
 .Rpackages
 .Rhistory
