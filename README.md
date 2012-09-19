@@ -16,9 +16,11 @@ where `x` is the significance statistic defined as `-log(p`-`value)`. In the tra
 ### GOglm using logistic regression for length bias adjustment
 
 Equation (2) in paper:
+
 $$
 logit\left[\pi(x)\right]=\beta_{0}+\beta_{1}x+\beta_{2}L
 $$
+
 is what we proposed to use for correcting length bias in GO enrichment analysis. The fundamental cause of length bias is that the transcript length becomes a confounding factor when it correlates with both the GO membership and the DE test significance. When we include transcript length `L` as a covariate, the coefficient $\beta_{1}$ now captures the correlation between the log odds of being in the specified GO category and the DE test significance -- conditional on gene lengths. A significant result from the hypothesis test $H0: \beta_{1} = 0$ indicates that the GO membership is correlated with the DE test significance even after adjusting for length bias.
 
 ## Access to the dataset
@@ -53,7 +55,7 @@ Testing DE genes was implemented using the `edgeR` package. We adopted the commo
 ```
 
 
-This $n$-by-$r$ matrix of RNA-seq read counts is also required for the NBP exact test `nbp.test()` implemented in `NBPSeq`, and for the nonparametric modeling of the variance `nbinomTest()` implemented in `DESeq`.
+This `n`-by-`r` matrix of RNA-seq read counts is also required for the NBP exact test `nbp.test()` implemented in `NBPSeq`, and for the nonparametric modeling of the variance `nbinomTest()` implemented in `DESeq`.
 
 For ease of comparison with published results in our paper, in analyzing the prostate cancer data, we used `edgeR` with a common dispersion estimate to obtain DE test $p$-values. For the Arabidopsis dataset (to be included in package), we used `NBPSeq` to obtain DE test $p$-values. EdgeR and NBPSeq are both based on NB models for RNA-Seq read frequencies. The NB model captures potential extra-Poisson variation in RNA-Seq read frequencies between independent biological samples using a dispersion parameter. Other methods based on NB model include the tagwise or trend options in `edgeR`, or the `DESeq` approach. All of these methods use the same exact NB test for assessing DE, but differ in how they estimate the dispersion parameter as a function of the mean frequency.
 
@@ -114,8 +116,8 @@ head(psc.subset)
 ```
 
 ```r
-## not run result <- goglm(data = psc.subset, trans.p = 'd.log', genome =
-## 'hg18', id = 'ensGene')
+## result <- goglm(data = psc.subset, trans.p = 'd.log', genome = 'hg18',
+## id = 'ensGene')
 ```
 
 
