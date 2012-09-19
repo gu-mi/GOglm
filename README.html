@@ -202,11 +202,13 @@ where <code>x</code> is the significance statistic defined as <code>-log(p</code
 
 <h3>GOglm using logistic regression for length bias adjustment</h3>
 
-<p>Equation (2) in paper:<br/>
-\[ 
+<p>Equation (2) in paper:</p>
+
+<p>\[ 
 logit\left[\pi(x)\right]=\beta_{0}+\beta_{1}x+\beta_{2}L
- \]<br/>
-is what we proposed to use for correcting length bias in GO enrichment analysis. The fundamental cause of length bias is that the transcript length becomes a confounding factor when it correlates with both the GO membership and the DE test significance. When we include transcript length <code>L</code> as a covariate, the coefficient \( \beta_{1} \) now captures the correlation between the log odds of being in the specified GO category and the DE test significance &ndash; conditional on gene lengths. A significant result from the hypothesis test \( H0: \beta_{1} = 0 \) indicates that the GO membership is correlated with the DE test significance even after adjusting for length bias.</p>
+ \]</p>
+
+<p>is what we proposed to use for correcting length bias in GO enrichment analysis. The fundamental cause of length bias is that the transcript length becomes a confounding factor when it correlates with both the GO membership and the DE test significance. When we include transcript length <code>L</code> as a covariate, the coefficient \( \beta_{1} \) now captures the correlation between the log odds of being in the specified GO category and the DE test significance &ndash; conditional on gene lengths. A significant result from the hypothesis test \( H0: \beta_{1} = 0 \) indicates that the GO membership is correlated with the DE test significance even after adjusting for length bias.</p>
 
 <h2>Access to the dataset</h2>
 
@@ -233,7 +235,7 @@ head(genes, 5)
 ## ENSG00000089199     0     0     0     0     0     2     0
 </code></pre>
 
-<p>This \( n \)-by-\( r \) matrix of RNA-seq read counts is also required for the NBP exact test <code>nbp.test()</code> implemented in <code>NBPSeq</code>, and for the nonparametric modeling of the variance <code>nbinomTest()</code> implemented in <code>DESeq</code>.</p>
+<p>This <code>n</code>-by-<code>r</code> matrix of RNA-seq read counts is also required for the NBP exact test <code>nbp.test()</code> implemented in <code>NBPSeq</code>, and for the nonparametric modeling of the variance <code>nbinomTest()</code> implemented in <code>DESeq</code>.</p>
 
 <p>For ease of comparison with published results in our paper, in analyzing the prostate cancer data, we used <code>edgeR</code> with a common dispersion estimate to obtain DE test \( p \)-values. For the Arabidopsis dataset (to be included in package), we used <code>NBPSeq</code> to obtain DE test \( p \)-values. EdgeR and NBPSeq are both based on NB models for RNA-Seq read frequencies. The NB model captures potential extra-Poisson variation in RNA-Seq read frequencies between independent biological samples using a dispersion parameter. Other methods based on NB model include the tagwise or trend options in <code>edgeR</code>, or the <code>DESeq</code> approach. All of these methods use the same exact NB test for assessing DE, but differ in how they estimate the dispersion parameter as a function of the mean frequency.</p>
 
@@ -285,8 +287,8 @@ head(psc.subset)
 ## ENSG00000166451 6.313e-52   1567
 </code></pre>
 
-<pre><code class="r">## not run result &lt;- goglm(data = psc.subset, trans.p = &#39;d.log&#39;, genome =
-## &#39;hg18&#39;, id = &#39;ensGene&#39;)
+<pre><code class="r">## result &lt;- goglm(data = psc.subset, trans.p = &#39;d.log&#39;, genome = &#39;hg18&#39;,
+## id = &#39;ensGene&#39;)
 </code></pre>
 
 <h2>GO annotations</h2>
