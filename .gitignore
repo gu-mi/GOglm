@@ -1,8 +1,8 @@
 *.[oa]
 *~
 *#
-.html
-.Rmd
+*.html
+*.Rmd
 *.Rcheck/
 .Rpackages
 .Rhistory
