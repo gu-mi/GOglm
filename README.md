@@ -8,10 +8,12 @@ The R package **GOglm** implements the `GOglm` approach discussed in Mi *et al.*
 ### Logistic regression and 2-by-2 contingency table
 
 In the generalized linear model (GLM) framework, we used continuous measures of DE as predictors and interpret the results in terms of odds. Sartor *et al.* [3] proposed the LRpath method in the microarray context with the following setup
+
 $$
 logit\left[\pi(x)\right]=\beta_{0}+\beta_{1}x
 $$
-where `x` is the significance statistic defined as `-log(p`-`value)`. In the traditional 2-by-2 contingency table framework, a $p$-value cut-off for declaring DE genes is pre-specified so that each gene is associated with a indicator of 0 or 1. All genes are then cross-classified into a 2-by-2 table ready for Fisher's exact test or any other contingency-table-based approaches. If we use this binary indicator as the predictor in the equation above, the $p$-values for testing $\beta_{1}=0$  are roughly equivalent to those obtained using contingency tables, though with minor scale differences.
+
+where `x` is the significance statistic defined as -log($p$-value). In the traditional 2-by-2 contingency table framework, a $p$-value cut-off for declaring DE genes is pre-specified so that each gene is associated with a indicator of 0 or 1. All genes are then cross-classified into a 2-by-2 table ready for Fisher's exact test or any other contingency-table-based approaches. If we use this binary indicator as the predictor in the equation above, the $p$-values for testing $\beta_{1}=0$  are roughly equivalent to those obtained using contingency tables, though with minor scale differences.
 
 ### GOglm using logistic regression for length bias adjustment
 
