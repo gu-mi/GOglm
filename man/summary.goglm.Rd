@@ -2,13 +2,15 @@
 \alias{summary.goglm}
 \title{Summerize GOglm Results}
 \usage{
-  \method{summary}{goglm} (x, en.cut = 0.05)
+  \method{summary}{goglm} (x, en.cut = 0.05, ...)
 }
 \arguments{
   \item{x}{An object of class \code{goglm}}
 
   \item{en.cut}{\emph{P}-value cut-off for declaring
   enriched categories (default = 0.05)}
+
+  \item{...}{Other parameters (for future use)}
 }
 \value{
   Some descriptive summaries based on the \code{goglm}

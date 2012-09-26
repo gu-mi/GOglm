@@ -11,6 +11,8 @@
 ##'
 ##' @param x An object of class \code{prepGOglm}
 ##'
+##' @param ... Other parameters (for future use)
+##'
 ##' @return Some descriptive summaries based on the results from the
 ##' \code{\link{prepare}} function
 ##'
@@ -20,8 +22,6 @@
 ##'
 ##' @author Gu Mi \email{mig@@stat.oregonstate.edu}, Yanming Di
 ##' \email{diy@@stat.oregonstate.edu}
-##'
-##' @export
 ##'
 ##' @examples
 ##' ## Load the datasets into R session:
@@ -36,7 +36,7 @@
 ##' ## For a summary of the DE test results:
 ##' summary(gene_table)
 ##'
-summary.prepGOglm <- function(x){
+summary.prepGOglm <- function(x, ...){
     n.gene <- dim(x)[1]
     na.dep <- sum(is.na(x[,1]))
     na.len <- sum(is.na(x[,2]))

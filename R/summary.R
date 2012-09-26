@@ -15,11 +15,12 @@
 ##' @return Some descriptive summaries depending on the object passed
 ##' to \code{x}
 ##'
+##' @seealso \code{\link{summary.prepGOglm}}, \code{\link{summary.goglm}}
+##'
 ##' @S3method summary prepGOglm
 ##'
 ##' @S3method summary goglm
 ##'
-##' @seealso \code{\link{summary.prepGOglm}}, \code{\link{summary.goglm}}
 ##' @author Gu Mi \email{mig@@stat.oregonstate.edu}, Yanming Di
 ##' \email{diy@@stat.oregonstate.edu}
 ##'

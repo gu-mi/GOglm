@@ -2,10 +2,12 @@
 \alias{plot.prepGOglm}
 \title{Plot Two Histograms For Significance Statistics and Gene Lengths}
 \usage{
-  \method{plot}{prepGOglm} (x)
+  \method{plot}{prepGOglm} (x, ...)
 }
 \arguments{
   \item{x}{An object of class \code{prepGOglm}}
+
+  \item{...}{Other parameters (for future use)}
 }
 \value{
   A panel of two histograms for significance statistics and

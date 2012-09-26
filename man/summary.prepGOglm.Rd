@@ -2,10 +2,12 @@
 \alias{summary.prepGOglm}
 \title{Summerize Data Preparation (DE Test)}
 \usage{
-  \method{summary}{prepGOglm} (x)
+  \method{summary}{prepGOglm} (x, ...)
 }
 \arguments{
   \item{x}{An object of class \code{prepGOglm}}
+
+  \item{...}{Other parameters (for future use)}
 }
 \value{
   Some descriptive summaries based on the results from the

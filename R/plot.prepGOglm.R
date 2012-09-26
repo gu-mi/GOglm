@@ -10,6 +10,8 @@
 ##'
 ##' @param x An object of class \code{prepGOglm}
 ##'
+##' @param ... Other parameters (for future use)
+##'
 ##' @return A panel of two histograms for significance statistics and
 ##' (transformed) gene lengths, respectively.
 ##'
@@ -19,8 +21,6 @@
 ##' \email{diy@@stat.oregonstate.edu}
 ##'
 ##' @seealso \code{\link{plot}}
-##'
-##' @export
 ##'
 ##' @examples
 ##' ## Load the datasets into R session:
@@ -35,7 +35,7 @@
 ##' ## Call the generic plot() function:
 ##' plot(gene_table)
 ##'
-plot.prepGOglm <- function(x){
+plot.prepGOglm <- function(x, ...){
     par(mfrow=c(1,2))
     hist(x[,1], main="Histogram of Siginificance Statistics",
          xlab="Significance Statistics")

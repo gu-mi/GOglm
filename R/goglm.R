@@ -75,8 +75,9 @@
 ##'
 
 goglm <- function(gene_data, cat2genes, n=5){
+
     n.cat <- length(cat2genes)
-    n.gene <- length(gene2cats)
+    n.gene <- dim(gene_data)[1]
     over.p <- numeric(n.cat)
     mean.len <- numeric(n.cat)
 

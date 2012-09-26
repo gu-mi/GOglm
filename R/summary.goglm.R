@@ -8,20 +8,21 @@
 ##'
 ##' @title Summerize GOglm Results
 ##'
-##' @param x  An object of class \code{goglm}
+##' @param x An object of class \code{goglm}
 ##'
 ##' @param en.cut \emph{P}-value cut-off for declaring enriched
 ##' categories (default = 0.05)
 ##'
-##' @return Some descriptive summaries based on the \code{goglm} result
+##' @param ... Other parameters (for future use)
 ##'
 ##' @method summary goglm
 ##'
+##' @return Some descriptive summaries based on the \code{goglm} result
+##'
 ##' @seealso \code{\link{summary.prepGOglm}}, \code{\link{summary}}
+##'
 ##' @author  Gu Mi \email{mig@@stat.oregonstate.edu}, Yanming Di
 ##' \email{diy@@stat.oregonstate.edu}
-##'
-##' @export
 ##'
 ##' @examples
 ##' ## Load the datasets into R session:
@@ -48,7 +49,7 @@
 ##' ## For a summary of the GOglm results:
 ##' summary(res)
 ##'
-summary.goglm <- function(x, en.cut = 0.05){
+summary.goglm <- function(x, en.cut = 0.05, ...){
     n.cat <- length(x$GOID)
     n.anno <- x$anno
     n.en.cat <- sum(x$over.p < en.cut)
@@ -56,6 +57,7 @@ summary.goglm <- function(x, en.cut = 0.05){
     cat("| Total number of categories under study is", n.cat, "\n")
     cat("| The number of genes annotated to these categories ranges from",
         min(n.anno), "to", max(n.anno), "\n")
-    cat("| Under", en.cut,"cut-off,",n.en.cat,"categories are enriched \n")
+    cat("| Under", en.cut,"cut-off, the number of enriched categories is",
+        n.en.cat, "\n")
     cat("-------------------------------------------------------------- \n")
 }
