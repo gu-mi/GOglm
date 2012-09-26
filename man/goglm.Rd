@@ -1,46 +1,29 @@
 \name{goglm}
 \alias{goglm}
-\title{Implement GOglm method for the GO enrichment analysis}
+\title{Implement GOglm method for GO enrichment analysis}
 \usage{
-  goglm(data, trans.p = c("log", "d.log"), trans.l = TRUE,
-    genome, id, cutoff = 0.05, min.cat = 10)
+  goglm(gene_data, cat2genes, n = 5)
 }
 \arguments{
-  \item{data}{An extended data frame from a differential
-  expression (DE) test output. Rows are gene identifiers
-  and columns include at least the following quantities:
-  "PValue" obtained from testing DE for each gene; "length"
-  of median transcript length for each gene (in bp).}
+  \item{gene_data}{Output from the \code{\link{prepare}}
+  function. It contains valid gene identifiers as row
+  names. Two columns are (1) (transformed) DE test
+  \emph{p}-values (significance statistics) and (2)
+  (transformed) gene lengths.}
 
-  \item{trans.p}{How to transform \emph{p}-values into
-  significance statistics. Value of "\code{log}" gives
-  -log(PValue) and value of "\code{d.log}" gives
-  log(1-log(PValue)).}
+  \item{cat2genes}{A list. Entry names are GO terms, and
+  elements are corresponding gene names. This mapping is
+  obtained by the \code{getgo} and \code{revMap}
+  functions.}
 
-  \item{trans.l}{Whether to log-transform length (default
-  is \code{TRUE}).}
-
-  \item{genome}{A string identifying the genome that genes
-  refer to (cf. the \code{goseq} function in the
-  \code{goseq} package).}
-
-  \item{id}{A string identifying the gene identifier used
-  by genes (cf. the \code{goseq} function in the
-  \code{goseq} package).}
-
-  \item{cutoff}{\emph{P}-value cut-off for declaring DE
-  genes (default = 0.05).}
-
-  \item{min.cat}{minimum number of genes within a category
-  (default = 10).}
+  \item{n}{If a category has fewer than \emph{n} genes
+  annotated, then this cagtegory will be excluded in the
+  final GO ranking list.}
 }
 \value{
-  \code{goglm} returns a list with 5 entries:
-  \item{GOID}{Gene Ontology category names.}
-  \item{over.p}{\emph{P}-values for the enrichment tests.}
-  \item{mean.len}{Mean gene lengths for all categories.}
-  \item{anno}{Number of genes annotated to each category.}
-  \item{rank}{Ranking of all categories being studied.}
+  An object of class \code{goglm} to be passed to
+  \code{summary} for more readable results. See Examples
+  below.
 }
 \description{
   Gene Ontology (GO) Enrichment Analysis Using Logistic
@@ -48,28 +31,47 @@
 }
 \details{
   This is the main function that implements the GOglm
-  method for GO enrichment analysis. It takes a data frame
-  with two columns: one for DE testing raw \emph{p}-values
-  and the other for median transcript lengths (either
-  transformed or not). The row names of the data frame must
-  be valid gene identifiers (in the Example below, we use
-  Ensembl gene IDs, e.g. ENSG00000127954), supported by the
-  \code{getgo} function in the \code{goseq} package.
-
-  To obtain a mapping between category names and gene
-  names, we use the \code{reversemapping} (internal)
-  function in \code{goseq}. Also the \code{nullp} function
-  in \code{goseq} is used to facilitate constructing the
-  category-to-gene list.
-}
-\note{
-  In the data example (see \code{ProsCancer}), we use a
-  subset of genes for illustrations. When all genes are
-  included in the analysis, it takes longer time to get the
-  results.
+  method for GO enrichment analysis using logistic
+  regression. Users need to specify three arguments, which
+  will be illustrated in the Argument and Examples sections
+  below. A DE test output with DE \emph{p}-values and gene
+  length information, and a category-to-gene mapping list,
+  are required to implement \code{goglm}. In general, the
+  DE test output is obtained by the \code{\link{prepare}}
+  function, and the mapping list can be obtained by
+  reverse-mapping the results from the \code{getgo}
+  function in the \code{goseq}.
 }
 \examples{
-## See the example for ProsCancer.
+## Load the datasets into R session:
+data(ProsCan_DE)
+DE.data <- ProsCan_DE
+data(ProsCan_Length)
+Length.data <- ProsCan_Length
+
+## Prepare a data frame to be passed to goglm():
+gene_table <- prepare(DE.data, Length.data, trans.p = "d.log", trans.l = TRUE)
+
+## For illustration, only consider a subset of genes:
+gene_data <- gene_table[1:100,1:2]
+
+## Prepare the "category-to-genes" list:
+library(goseq)
+gene2cats <- getgo(rownames(gene_data), "hg18", "ensGene")
+cat2genes <- revMap(gene2cats)
+
+## Run goglm():
+res <- goglm(gene_data, cat2genes, n=5)
+names(res)  # "GOID"   "over.p" "anno"   "rank"
+
+## For more readable outputs:
+output <- cbind(res$over.p, res$anno, res$rank)
+rownames(output) <- unfactor(res$GOID)
+colnames(output) <- c("over.p", "n.anno", "rank")
+head(output)
+
+## For a summary of the GOglm results:
+summary(res)
 }
 \author{
   Gu Mi \email{mig@stat.oregonstate.edu}, Yanming Di
