@@ -1,6 +1,6 @@
 Package: GOglm
 Type: Package
-Version: 0.1.0
+Version: 0.2.0
 Title: Length Bias Correction in Gene Ontology Enrichment Analysis Using
     Logistic Regression
 Author: Gu Mi <mig@stat.oregonstate.edu>, Yanming Di <diy@stat.oregonstate.edu>.
@@ -10,16 +10,23 @@ Description: This GOglm package is a beta version under development. The goglm
     press). The package includes a summarized RNA-Seq data example (the
     prostate cancer dataset) for methodological illustrations.
 Depends:
-    goseq,
-    GO.db,
-    org.Hs.eg.db,
     R (>= 2.10)
+Imports:
+    goseq
 LazyData: yes
 LazyLoad: yes
 License: GPL-2
 URL: http://people.oregonstate.edu/~mig
 Collate:
     'goglm.R'
+    'plot.R'
+    'plot.prepGOglm.R'
+    'prepare.R'
+    'revMap.R'
+    'summary.R'
     'summary.goglm.R'
-    'package.R'
-    'data.R'
+    'summary.prepGOglm.R'
+    'unfactor.R'
+    'ProsCan_DE.R'
+    'ProsCan_Length.R'
+    'GOglm-package.R'
