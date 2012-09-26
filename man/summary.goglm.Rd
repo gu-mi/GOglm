@@ -1,47 +1,53 @@
 \name{summary.goglm}
 \alias{summary.goglm}
-\title{Print Summary of a GOglm Object}
+\title{Summerize GOglm Results}
 \usage{
-  summary.goglm(obj, en.pval = 0.05, print.level = 1, ...)
+  \method{summary}{goglm} (x, en.cut = 0.05)
 }
 \arguments{
-  \item{obj}{An object of class \code{goglm}. Generally it
-  is the output from \code{\link{goglm}}.}
+  \item{x}{An object of class \code{goglm}}
 
-  \item{en.pval}{\emph{P}-value cut-off for declaring
-  enriched categories.}
-
-  \item{print.level}{Control the amount of messages
-  printed: 0 for summary information only; 1 (default) for
-  adding a ranking list of GO terms; 2 for adding details
-  for the enriched GO terms (from the \code{GO.db}
-  package).}
-
-  \item{...}{Other parameters (for future use).}
+  \item{en.cut}{\emph{P}-value cut-off for declaring
+  enriched categories (default = 0.05)}
 }
 \value{
-  Summaries of the dataset, a complete list of GO ranking
-  list, and detailed information for the enriched
-  categories (depending on the value of the
-  \code{print.level} argument).
+  Some descriptive summaries based on the \code{goglm}
+  result
 }
 \description{
-  Print Summary of a GOglm Object. Generally it is the
-  output from \code{\link{goglm}}.
+  Summerize GOglm results (from the \code{\link{goglm}}
+  function)
 }
 \examples{
-## See the example for ProsCancer.
+## Load the datasets into R session:
+data(ProsCan_DE)
+DE.data <- ProsCan_DE
+data(ProsCan_Length)
+Length.data <- ProsCan_Length
+
+## Prepare a data frame to be passed to goglm():
+gene_table <- prepare(DE.data, Length.data, trans.p = "d.log", trans.l = TRUE)
+
+## For illustration, only consider a subset of genes:
+gene_data <- gene_table[1:100,1:2]
+
+## Prepare the "category-to-genes" list:
+library(goseq)
+gene2cats <- getgo(rownames(gene_data), "hg18", "ensGene")
+cat2genes <- revMap(gene2cats)
+
+## Run goglm():
+res <- goglm(gene_data, cat2genes, n=5)
+names(res)  # "GOID"   "over.p" "anno"   "rank"
+
+## For a summary of the GOglm results:
+summary(res)
 }
 \author{
   Gu Mi \email{mig@stat.oregonstate.edu}, Yanming Di
   \email{diy@stat.oregonstate.edu}
 }
-\references{
-  Mi G, Di Y, Emerson S, Cumbie JS and Chang JH (2012)
-  "Length bias correction in Gene Ontology enrichment
-  analysis using logistic regression", PLOS ONE, in press.
-}
 \seealso{
-  \code{\link{goglm}}.
+  \code{\link{summary.prepGOglm}}, \code{\link{summary}}
 }
 
