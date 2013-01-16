@@ -80,7 +80,8 @@ summary(res)
 \references{
   Mi G, Di Y, Emerson S, Cumbie JS and Chang JH (2012)
   "Length bias correction in Gene Ontology enrichment
-  analysis using logistic regression", PLOS ONE, in press.
+  analysis using logistic regression", PLOS ONE, 7(10):
+  e46128
 }
 \seealso{
   \code{\link{summary.goglm}} which summarizes GOglm
