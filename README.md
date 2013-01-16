@@ -67,11 +67,11 @@ The table below shows the partial result of the NB exact test using `edgeR`. The
 
 ```
 ##                  logFC logCPM    PValue       FDR
-## ENSG00000127954 12.373  6.663 2.252e-80 1.115e-75
-## ENSG00000151503  5.403  8.495 1.532e-65 3.793e-61
-## ENSG00000096060  4.888  9.444 6.908e-60 1.140e-55
-## ENSG00000091879  5.669  6.259 1.094e-54 1.354e-50
-## ENSG00000132437 -5.931  7.945 2.638e-52 2.612e-48
+## ENSG00000127954 12.373  6.663 2.575e-80 1.275e-75
+## ENSG00000151503  5.403  8.495 1.782e-65 4.410e-61
+## ENSG00000096060  4.888  9.444 7.984e-60 1.317e-55
+## ENSG00000091879  5.669  6.259 1.208e-54 1.495e-50
+## ENSG00000132437 -5.931  7.945 2.950e-52 2.921e-48
 ```
 
 
@@ -189,6 +189,13 @@ Besides the data frame from `prepare`, we also need to have a *mapping list* wit
 ## Prepare the 'category-to-genes' list:
 library(goseq)
 gene2cats <- getgo(rownames(gene_data), "hg18", "ensGene")
+```
+
+```
+## Warning: package 'AnnotationDbi' was built under R version 2.15.2
+```
+
+```r
 cat2genes <- revMap(gene2cats)
 ## What does the list look like?
 cat2genes[1]
@@ -228,7 +235,7 @@ summary(res)
 
 ```
 ## -------------------------------------------------------------- 
-## | Total number of categories under study is 66 
+## | Total number of categories under study is 69 
 ## | The number of genes annotated to these categories ranges from 6 to 23 
 ## | Under 0.05 cut-off, the number of enriched categories is 7 
 ## --------------------------------------------------------------
@@ -299,11 +306,11 @@ Non-convergence of Newton-Raphson algorithm is more likely to occur when samples
 
 We didn't explore how different methods for identifying DE genes will influence the downstream enrichment analyses. Some researchers believe that methods for DE testing are in some sense irrelevant to subsequent analysis (see `GOstats` package vignette, `GOvis`), but adopting the currently widely used approaches such as `edgeR`, `DESeq` and `NBPSeq` will make the results more trustworthy. We note in paper that these NB-based approaches are superior when biological replicates present, but potential differences in the final list may result from gene filtering criteria on the population genes, such as deciding fold-changes for (non-)expressed genes and/or discarding genes with unavailable $p$-values.
 
-Bioconductor annotation databases are updated regularly as the state of biological knowledge changes, so that results might be slightly different as releases of packages change. Our analyses in the paper were based on R version 2.15.1 (2012-06-22) and Bioconductor release 2.9 (November 1, 2011).
+Bioconductor annotation databases are updated regularly as the state of biological knowledge changes, so that results might be slightly different as releases of packages change. Our analyses in the paper were based on R version 2.15.1 (2012-06-22) and Bioconductor release 2.9 (November 1, 2011). The results here in this README file are based on the lastest versions of R/Bioconductor packages.
 
 ## References
 
-[1] Mi G, Di Y, Emerson S, Cumbie JS and Chang JH (2012) "Length bias correction in Gene Ontology enrichment analysis using logistic regression", PLOS ONE, in press.
+[1] Mi G, Di Y, Emerson S, Cumbie JS and Chang JH (2012) "Length bias correction in Gene Ontology enrichment analysis using logistic regression", PLOS ONE, 7(10): e46128.
 
 [2] Li H, Lovci M, Kwon Y, Rosenfeld M, Fu X, et al. (2008) "Determination of tag density required for digital transcriptome analysis: application to an androgen-sensitive prostate cancer model", Proc Natl Acad Sci U S A 105: 20179-20184.
 
