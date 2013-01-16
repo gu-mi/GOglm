@@ -231,12 +231,17 @@ names(res)
 
 
 For a summary of the `GOglm` results, use the generic `summary` function:
+
 ```r
 summary(res)
 ```
 
 ```
-## Error: object 'summary' not found
+## -------------------------------------------------------------- 
+## | Total number of categories under study is 69 
+## | The number of genes annotated to these categories ranges from 6 to 23 
+## | Under 0.05 cut-off, the number of enriched categories is 7 
+## --------------------------------------------------------------
 ```
 
 
