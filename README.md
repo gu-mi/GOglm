@@ -83,8 +83,8 @@ In `GOglm` we provide two data frames based on this prostate cancer dataset: `Pr
 ```r
 library(GOglm)
 data(ProsCan_DE)
-DE.data <- ProsCan_DE
-head(DE.data)
+DE_data <- ProsCan_DE
+head(DE_data)
 ```
 
 ```
@@ -103,8 +103,8 @@ and here are the first six lines of the `ProsCan_Length` data frame:
 
 ```r
 data(ProsCan_Length)
-Length.data <- ProsCan_Length
-head(Length.data)
+Length_data <- ProsCan_Length
+head(Length_data)
 ```
 
 ```
@@ -123,7 +123,7 @@ These two data frames are expected from the end-users to be passed to the `prepa
 
 ```r
 ## Prepare a data frame to be passed to goglm():
-gene_table <- prepare(DE.data, Length.data, trans.p = "d.log", trans.l = TRUE)
+gene_table <- prepare(DE_data, Length_data, trans.p = "d.log", trans.l = TRUE)
 ## Check first 10 rows of the data frame:
 gene_table[1:10, 1:2]
 ```
@@ -140,6 +140,8 @@ gene_table[1:10, 1:2]
 ## ENSG00000163492    4.641  8.242
 ## ENSG00000113594    4.607  9.220
 ## ENSG00000116285    4.588  8.033
+## attr(,"class")
+## [1] "prepGOglm"
 ```
 
 
@@ -234,11 +236,7 @@ summary(res)
 ```
 
 ```
-## -------------------------------------------------------------- 
-## | Total number of categories under study is 69 
-## | The number of genes annotated to these categories ranges from 6 to 23 
-## | Under 0.05 cut-off, the number of enriched categories is 7 
-## --------------------------------------------------------------
+## Error: object 'summary' not found
 ```
 
 
