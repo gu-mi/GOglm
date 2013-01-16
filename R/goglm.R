@@ -30,7 +30,7 @@
 ##'
 ##' @references Mi G, Di Y, Emerson S, Cumbie JS and Chang JH (2012)
 ##' "Length bias correction in Gene Ontology enrichment analysis using
-##' logistic regression", PLOS ONE, in press.
+##' logistic regression", PLOS ONE, 7(10): e46128
 ##'
 ##' @author Gu Mi \email{mig@@stat.oregonstate.edu}, Yanming Di
 ##' \email{diy@@stat.oregonstate.edu}
@@ -105,6 +105,7 @@ goglm <- function(gene_data, cat2genes, n=5){
     sub.GO.info <- GO.info[GO.info$anno > n, ]
     ord.GO.info <- sub.GO.info[order(sub.GO.info$over.p), ]
     ord.GO.info$rank <- seq(1, dim(ord.GO.info)[1])
+    ord.GO.info <- as.data.frame(ord.GO.info)
     
     # return ord.GO.info as a data frame of class "goglm"
     class(ord.GO.info) <- "goglm"
