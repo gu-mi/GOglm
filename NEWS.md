@@ -3,7 +3,7 @@
 ************************************
 **Changes for version 0.4.2**
 -----------------------------------
-We rewrite some S3 methods to make them more standard, and update relevant R documents. All examples have been checked. Publication information is also updated.
+We rewrite some S3 methods to make them more standard, and update relevant R documents. All examples have been checked. Publication information is also updated. For next release, we plan to speed up the code efficiency. Please take a look at the development page for this package on [GitHub](https://github.com/gu-mi/GOglm).
 
 ************************************
 
@@ -20,3 +20,5 @@ The following R codes and R data files have been documented in this version:
 * goglm: R function
 * summary.goglm: R function
 * ProsCancer: Data example
+
+Please take a look at the development page for this package on [GitHub](https://github.com/gu-mi/GOglm).
