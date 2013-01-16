@@ -1,6 +1,11 @@
 **NEWS for the `GOglm` package**
 ========================================================
 ************************************
+**Changes for version 0.4.2**
+-----------------------------------
+We rewrite some S3 methods to make them more standard, and update relevant R documents. All examples have been checked. Publication information is also updated.
+
+************************************
 
 **Changes for version 0.2.0**
 -----------------------------------
