@@ -25,14 +25,14 @@
 \examples{
 ## Load the dataset into R session:
 data(ProsCan_Length)
-Length.data <- ProsCan_Length
+Length_data <- ProsCan_Length
 
 ## Another dataset from this package:
 data(ProsCan_DE)
-DE.data <- ProsCan_DE
+DE_data <- ProsCan_DE
 
 ## Prepare a data frame to be passed to goglm():
-gene_table <- prepare(DE.data, Length.data, trans.p = "d.log", trans.l = TRUE)
+gene_table <- prepare(DE_data, Length_data, trans.p = "d.log", trans.l = TRUE)
 ## Check first 10 rows of the data frame:
 gene_table[1:10,1:2]
 

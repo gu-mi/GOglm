@@ -1,6 +1,6 @@
 \name{goglm}
 \alias{goglm}
-\title{Implement GOglm method for GO enrichment analysis}
+\title{Implement the GOglm method for GO enrichment analysis}
 \usage{
   goglm(gene_data, cat2genes, n = 5)
 }
@@ -45,12 +45,12 @@
 \examples{
 ## Load the datasets into R session:
 data(ProsCan_DE)
-DE.data <- ProsCan_DE
+DE_data <- ProsCan_DE
 data(ProsCan_Length)
-Length.data <- ProsCan_Length
+Length_data <- ProsCan_Length
 
 ## Prepare a data frame to be passed to goglm():
-gene_table <- prepare(DE.data, Length.data, trans.p = "d.log", trans.l = TRUE)
+gene_table <- prepare(DE_data, Length_data, trans.p = "d.log", trans.l = TRUE)
 
 ## For illustration, only consider a subset of genes:
 gene_data <- gene_table[1:100,1:2]

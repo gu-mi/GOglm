@@ -11,7 +11,7 @@
 ##' obtained by reverse-mapping the results from the \code{getgo}
 ##' function in the \code{goseq}.
 ##'
-##' @title Implement GOglm method for GO enrichment analysis
+##' @title Implement the GOglm method for GO enrichment analysis
 ##'
 ##' @param gene_data Output from the \code{\link{prepare}}
 ##' function. It contains valid gene identifiers as row names. Two
@@ -45,12 +45,12 @@
 ##' @examples
 ##' ## Load the datasets into R session:
 ##' data(ProsCan_DE)
-##' DE.data <- ProsCan_DE
+##' DE_data <- ProsCan_DE
 ##' data(ProsCan_Length)
-##' Length.data <- ProsCan_Length
+##' Length_data <- ProsCan_Length
 ##'
 ##' ## Prepare a data frame to be passed to goglm():
-##' gene_table <- prepare(DE.data, Length.data, trans.p = "d.log", trans.l = TRUE)
+##' gene_table <- prepare(DE_data, Length_data, trans.p = "d.log", trans.l = TRUE)
 ##'
 ##' ## For illustration, only consider a subset of genes:
 ##' gene_data <- gene_table[1:100,1:2]
@@ -105,6 +105,8 @@ goglm <- function(gene_data, cat2genes, n=5){
     sub.GO.info <- GO.info[GO.info$anno > n, ]
     ord.GO.info <- sub.GO.info[order(sub.GO.info$over.p), ]
     ord.GO.info$rank <- seq(1, dim(ord.GO.info)[1])
+    
+    # return ord.GO.info as a data frame of class "goglm"
     class(ord.GO.info) <- "goglm"
     return(invisible(ord.GO.info))
 }

@@ -74,6 +74,7 @@ plot(gene_table)
 \references{
   Mi G, Di Y, Emerson S, Cumbie JS and Chang JH (2012)
   "Length bias correction in Gene Ontology enrichment
-  analysis using logistic regression", PLOS ONE, in press.
+  analysis using logistic regression", PLOS ONE, 7(10):
+  e4612.
 }
 

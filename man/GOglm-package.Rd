@@ -32,7 +32,7 @@ Logistic Regression}
 \references{
   Mi G, Di Y, Emerson S, Cumbie JS and Chang JH (2012)
   "Length bias correction in Gene Ontology enrichment
-  analysis using logistic regression", PLOS ONE, in press.
+  analysis using logistic regression", 7(10): e46128.
 }
 \keyword{package}
 
