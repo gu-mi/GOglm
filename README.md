@@ -1,5 +1,4 @@
 # GOglm
-*********************************************
 
 The R package **GOglm** implements the `GOglm` approach discussed in Mi *et al.* [1]. It includes a summarized RNA-Seq data example (the prostate cancer dataset [2]) for methodological illustrations. This is a beta version under development. In this README file, we briefly outline the setup of the logistic regression model for length bias corrections, followed by discussions on access to the RNA-Seq datasets, Gene Ontology (GO) annotations, variable transformations, potential computational issues, choice of DE testing procedures and R/Bioconductor software information.
 
