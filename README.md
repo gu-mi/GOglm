@@ -1,5 +1,4 @@
 # GOglm
-=============================================
 *********************************************
 
 The R package **GOglm** implements the `GOglm` approach discussed in Mi *et al.* [1]. It includes a summarized RNA-Seq data example (the prostate cancer dataset [2]) for methodological illustrations. This is a beta version under development. In this README file, we briefly outline the setup of the logistic regression model for length bias corrections, followed by discussions on access to the RNA-Seq datasets, Gene Ontology (GO) annotations, variable transformations, potential computational issues, choice of DE testing procedures and R/Bioconductor software information.
@@ -313,10 +312,10 @@ Bioconductor annotation databases are updated regularly as the state of biologic
 
 ## References
 
-[1] Mi G, Di Y, Emerson S, Cumbie JS and Chang JH (2012) "Length bias correction in Gene Ontology enrichment analysis using logistic regression", PLOS ONE, 7(10): e46128.
+[1] Mi G, Di Y, Emerson S, Cumbie JS and Chang JH (2012) "[Length bias correction in Gene Ontology enrichment analysis using logistic regression](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0046128)", PLOS ONE, 7(10): e46128.
 
-[2] Li H, Lovci M, Kwon Y, Rosenfeld M, Fu X, et al. (2008) "Determination of tag density required for digital transcriptome analysis: application to an androgen-sensitive prostate cancer model", Proc Natl Acad Sci U S A 105: 20179-20184.
+[2] Li H, Lovci M, Kwon Y, Rosenfeld M, Fu X, et al. (2008) "[Determination of tag density required for digital transcriptome analysis: application to an androgen-sensitive prostate cancer model](http://www.pnas.org/content/105/51/20179)", Proc Natl Acad Sci U S A 105: 20179-20184.
 
-[3] Sartor M, Leikauf G, Medvedovic M (2009) "LRpath: a logistic regression approach for identifying enriched biological groups in gene expression data", Bioinformatics 25: 211-217.
+[3] Sartor M, Leikauf G, Medvedovic M (2009) "[LRpath: a logistic regression approach for identifying enriched biological groups in gene expression data](https://academic.oup.com/bioinformatics/article-lookup/doi/10.1093/bioinformatics/btn592)", Bioinformatics 25: 211-217.
 
-[4] Young M, Wakefield M, Smyth G, Oshlack A (2010) "Gene ontology analysis for RNA-seq: accounting for selection bias", Genome Biol 11: R14.
+[4] Young M, Wakefield M, Smyth G, Oshlack A (2010) "[Gene ontology analysis for RNA-seq: accounting for selection bias](https://genomebiology.biomedcentral.com/articles/10.1186/gb-2010-11-2-r14)", Genome Biol 11: R14.
